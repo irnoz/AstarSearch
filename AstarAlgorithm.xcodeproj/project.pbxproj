@@ -58,9 +58,9 @@
 		CE2695182B148BF700C9032D /* AstarAlgorithm */ = {
 			isa = PBXGroup;
 			children = (
-				CE2695302B15CE3000C9032D /* ViewModel */,
+				CE2695302B15CE3000C9032D /* AstartViewModel */,
 				CE26952F2B15CE2900C9032D /* AstarModel */,
-				CE26952E2B15CE1D00C9032D /* View */,
+				CE26952E2B15CE1D00C9032D /* AstarView */,
 				CE26952D2B15CE1300C9032D /* Utils */,
 				CE2695272B148BF800C9032D /* Info.plist */,
 				CE2695192B148BF700C9032D /* AppDelegate.swift */,
@@ -77,13 +77,13 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		CE26952E2B15CE1D00C9032D /* View */ = {
+		CE26952E2B15CE1D00C9032D /* AstarView */ = {
 			isa = PBXGroup;
 			children = (
 				CE26951D2B148BF700C9032D /* AstarViewController.swift */,
 				CE2695312B15CE6E00C9032D /* AstarView.swift */,
 			);
-			path = View;
+			path = AstarView;
 			sourceTree = "<group>";
 		};
 		CE26952F2B15CE2900C9032D /* AstarModel */ = {
@@ -94,12 +94,12 @@
 			path = AstarModel;
 			sourceTree = "<group>";
 		};
-		CE2695302B15CE3000C9032D /* ViewModel */ = {
+		CE2695302B15CE3000C9032D /* AstartViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				CE2695332B15CEBB00C9032D /* AstarViewModel.swift */,
 			);
-			path = ViewModel;
+			path = AstartViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

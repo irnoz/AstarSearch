@@ -12,12 +12,9 @@ class ViewController: UIViewController {
     // MARK: Properties
     var algorithmNameLabel: UILabel!
     var tagPicker: UIPickerView!
-    var nodes = [UIButton]()
+    var nodeButtons = [[UIButton]]()
     var selectedIndexes: [IndexPath] = [IndexPath(row: 0, section: 0)]
-    var startIndex: (Int, Int)? = nil
-    var targetIndex: (Int, Int)? = nil
-    var graph = Array(repeating: Array(repeating: 1, count: 5), count: 5)
-    var selectedIndex: (Int, Int)? = nil
+    var graph = Graph(withSize: 10)
     
     var things = ["chose start", "chose end", "chose block"]
     
@@ -25,11 +22,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        printMatrix()
+        graph.printGraph()
         
-        tagPicker.delegate = self
-        tagPicker.dataSource = self
-        
-        view = UIView()
         view.backgroundColor = .white
         
         algorithmNameLabel = UILabel()
@@ -42,7 +36,8 @@ class ViewController: UIViewController {
         tagPicker = UIPickerView()
         tagPicker.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tagPicker)
-        
+        tagPicker.delegate = self
+        tagPicker.dataSource = self
         
         let startButton = UIButton(type: .system)
         startButton.translatesAutoresizingMaskIntoConstraints = false
@@ -66,11 +61,12 @@ class ViewController: UIViewController {
         nodesView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(nodesView)
         
-        let width = 50
-        let height = 50
+        let width = 25
+        let height = 25
         
-        for row in 0..<graph.count {
-            for col in 0..<graph.count {
+        for row in 0..<graph.size{
+            var nodeButtonsRow = [UIButton]()
+            for col in 0..<graph.size {
                 let node = UIButton(type: .system)
                 node.titleLabel?.font = UIFont.systemFont(ofSize: 16)
                 node.setTitle("\(row), \(col)", for: .normal)
@@ -85,8 +81,9 @@ class ViewController: UIViewController {
                 nodesView.addSubview(node)
                 
                 node.addTarget(self, action: #selector(nodeTapped), for: .touchUpInside)
-                nodes.append(node)
+                nodeButtonsRow.append(node)
             }
+            nodeButtons.append(nodeButtonsRow)
         }
         
         func handelButtonTap(selectedIndex: (Int, Int)) {
@@ -100,8 +97,8 @@ class ViewController: UIViewController {
             tagPicker.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             tagPicker.topAnchor.constraint(equalTo: algorithmNameLabel.bottomAnchor, constant: -40),
             
-            nodesView.widthAnchor.constraint(equalToConstant: CGFloat(5 * width)),
-            nodesView.heightAnchor.constraint(equalToConstant: CGFloat(5 * height)),
+            nodesView.widthAnchor.constraint(equalToConstant: CGFloat(graph.size * width)),
+            nodesView.heightAnchor.constraint(equalToConstant: CGFloat(graph.size * height)),
             nodesView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             nodesView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             
@@ -122,11 +119,14 @@ class ViewController: UIViewController {
     }
     
     @objc func clearButtonTapped(_ sender: UIButton) {
-        
+        graph.clear()
+        updateGraphView()
     }
     
     @objc func generateButtonTapped(_ sender: UIButton) {
-        
+        graph.clear()
+        graph.generate()
+        updateGraphView()
     }
     
     
@@ -137,24 +137,33 @@ class ViewController: UIViewController {
         }
         if sender.backgroundColor == .green {
             sender.backgroundColor = .white
-            startIndex = nil
+            graph.startIndex = nil
+            graph.nodes[currentIndex.0][currentIndex.1].isStart = true
         } else if sender.backgroundColor == .red {
             sender.backgroundColor = .white
-            targetIndex = nil
+            graph.targetIndex = nil
+            graph.nodes[currentIndex.0][currentIndex.1].isStart = false
         } else {
-            if startIndex == nil {
+            if graph.startIndex == nil {
                 sender.backgroundColor = .green
-                startIndex = currentIndex
-            } else if targetIndex == nil {
+                graph.startIndex = currentIndex
+                graph.nodes[currentIndex.0][currentIndex.1].isTarget = true
+            } else if graph.targetIndex == nil {
                 sender.backgroundColor = .red
-                targetIndex = currentIndex
+                graph.targetIndex = currentIndex
+                graph.nodes[currentIndex.0][currentIndex.1].isTarget = false
             } else {
-                sender.backgroundColor = sender.backgroundColor == .white ? .purple : .white
+                if sender.backgroundColor == .white {
+                    sender.backgroundColor = .purple
+                    graph.nodes[currentIndex.0][currentIndex.1].isBlocked = true
+                } else {
+                    sender.backgroundColor = .white
+                    graph.nodes[currentIndex.0][currentIndex.1].isBlocked = false
+                }
             }
         }
         
-        print(currentIndex)
-        
+        print("\(currentIndex) \(graph.nodes[currentIndex.0][currentIndex.1].isBlocked)")
     }
     
     private func getIndex(title: String) -> (Int, Int)? {
@@ -166,12 +175,19 @@ class ViewController: UIViewController {
         return (i, j)
     }
     
-    private func printMatrix() {
-        for arr in graph {
-            for el in arr {
-                print("\(el) ", separator: " ", terminator: "")
+    func updateGraphView() {
+        for i in 0..<graph.size {
+            for j in 0..<graph.size {
+                if graph.nodes[i][j].isBlocked {
+                    nodeButtons[i][j].backgroundColor = .purple
+                } else if graph.nodes[i][j].isStart {
+                    nodeButtons[i][j].backgroundColor = .green
+                } else if graph.nodes[i][j].isTarget {
+                    nodeButtons[i][j].backgroundColor = .red
+                } else {
+                    nodeButtons[i][j].backgroundColor = .white
+                }
             }
-            print()
         }
     }
 }
