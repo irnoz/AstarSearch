@@ -8,22 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		CE26951A2B148BF700C9032D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2695192B148BF700C9032D /* AppDelegate.swift */; };
-		CE26951C2B148BF700C9032D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE26951B2B148BF700C9032D /* SceneDelegate.swift */; };
-		CE26951E2B148BF700C9032D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE26951D2B148BF700C9032D /* ViewController.swift */; };
-		CE2695212B148BF700C9032D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE26951F2B148BF700C9032D /* Main.storyboard */; };
+		CE26951E2B148BF700C9032D /* AstarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE26951D2B148BF700C9032D /* AstarViewController.swift */; };
 		CE2695232B148BF800C9032D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE2695222B148BF800C9032D /* Assets.xcassets */; };
 		CE2695262B148BF800C9032D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE2695242B148BF800C9032D /* LaunchScreen.storyboard */; };
+		CE2695322B15CE6E00C9032D /* AstarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2695312B15CE6E00C9032D /* AstarView.swift */; };
+		CE2695342B15CEBB00C9032D /* AstarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2695332B15CEBB00C9032D /* AstarViewModel.swift */; };
+		CE2695362B15CECD00C9032D /* AstarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2695352B15CECD00C9032D /* AstarModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CE2695162B148BF700C9032D /* AstarAlgorithm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AstarAlgorithm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE2695192B148BF700C9032D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CE26951B2B148BF700C9032D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CE26951D2B148BF700C9032D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CE2695202B148BF700C9032D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CE26951D2B148BF700C9032D /* AstarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstarViewController.swift; sourceTree = "<group>"; };
 		CE2695222B148BF800C9032D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE2695252B148BF800C9032D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE2695272B148BF800C9032D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE2695312B15CE6E00C9032D /* AstarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstarView.swift; sourceTree = "<group>"; };
+		CE2695332B15CEBB00C9032D /* AstarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstarViewModel.swift; sourceTree = "<group>"; };
+		CE2695352B15CECD00C9032D /* AstarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstarModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +58,48 @@
 		CE2695182B148BF700C9032D /* AstarAlgorithm */ = {
 			isa = PBXGroup;
 			children = (
-				CE2695192B148BF700C9032D /* AppDelegate.swift */,
-				CE26951B2B148BF700C9032D /* SceneDelegate.swift */,
-				CE26951D2B148BF700C9032D /* ViewController.swift */,
-				CE26951F2B148BF700C9032D /* Main.storyboard */,
-				CE2695222B148BF800C9032D /* Assets.xcassets */,
-				CE2695242B148BF800C9032D /* LaunchScreen.storyboard */,
+				CE2695302B15CE3000C9032D /* ViewModel */,
+				CE26952F2B15CE2900C9032D /* AstarModel */,
+				CE26952E2B15CE1D00C9032D /* View */,
+				CE26952D2B15CE1300C9032D /* Utils */,
 				CE2695272B148BF800C9032D /* Info.plist */,
+				CE2695192B148BF700C9032D /* AppDelegate.swift */,
 			);
 			path = AstarAlgorithm;
+			sourceTree = "<group>";
+		};
+		CE26952D2B15CE1300C9032D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				CE2695222B148BF800C9032D /* Assets.xcassets */,
+				CE2695242B148BF800C9032D /* LaunchScreen.storyboard */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		CE26952E2B15CE1D00C9032D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CE26951D2B148BF700C9032D /* AstarViewController.swift */,
+				CE2695312B15CE6E00C9032D /* AstarView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CE26952F2B15CE2900C9032D /* AstarModel */ = {
+			isa = PBXGroup;
+			children = (
+				CE2695352B15CECD00C9032D /* AstarModel.swift */,
+			);
+			path = AstarModel;
+			sourceTree = "<group>";
+		};
+		CE2695302B15CE3000C9032D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CE2695332B15CEBB00C9032D /* AstarViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +162,6 @@
 			files = (
 				CE2695262B148BF800C9032D /* LaunchScreen.storyboard in Resources */,
 				CE2695232B148BF800C9032D /* Assets.xcassets in Resources */,
-				CE2695212B148BF700C9032D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +172,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE26951E2B148BF700C9032D /* ViewController.swift in Sources */,
+				CE2695322B15CE6E00C9032D /* AstarView.swift in Sources */,
+				CE26951E2B148BF700C9032D /* AstarViewController.swift in Sources */,
+				CE2695362B15CECD00C9032D /* AstarModel.swift in Sources */,
+				CE2695342B15CEBB00C9032D /* AstarViewModel.swift in Sources */,
 				CE26951A2B148BF700C9032D /* AppDelegate.swift in Sources */,
-				CE26951C2B148BF700C9032D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		CE26951F2B148BF700C9032D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE2695202B148BF700C9032D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		CE2695242B148BF800C9032D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -297,7 +325,6 @@
 				INFOPLIST_FILE = AstarAlgorithm/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -325,7 +352,6 @@
 				INFOPLIST_FILE = AstarAlgorithm/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
