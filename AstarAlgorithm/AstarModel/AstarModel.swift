@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 class Graph {
     var startIndex: (Int, Int)? = nil
     var targetIndex: (Int, Int)? = nil
@@ -43,13 +42,18 @@ class Graph {
         startIndex = (Int.random(in: 0..<size), Int.random(in: 0..<size))
         targetIndex = (Int.random(in: 0..<size), Int.random(in: 0..<size))
         
-        nodes[startIndex!.0][startIndex!.1].isStart = true
-        nodes[targetIndex!.0][targetIndex!.1].isTarget = true
-        print("\(targetIndex!.0) \(targetIndex!.1)")
+        guard let startIndex,
+              let targetIndex
+        else { 
+            return
+        }
+        
+        nodes[startIndex.0][startIndex.1].isStart = true
+        nodes[targetIndex.0][targetIndex.1].isTarget = true
         for i in 0..<size {
             for j in 0..<size {
                 if !nodes[i][j].isStart && !nodes[i][j].isTarget {
-                    nodes[i][j].isBlocked = (Int.random(in: 0...10) < 3)
+                    nodes[i][j].isBlocked = (Int.random(in: 0...10) < 4)
                 }
             }
         }

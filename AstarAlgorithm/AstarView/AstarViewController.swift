@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        printMatrix()
-        graph.printGraph()
+//        graph.printGraph()
         
         view.backgroundColor = .white
         

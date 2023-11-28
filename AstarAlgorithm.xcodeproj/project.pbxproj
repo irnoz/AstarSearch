@@ -14,6 +14,7 @@
 		CE2695322B15CE6E00C9032D /* AstarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2695312B15CE6E00C9032D /* AstarView.swift */; };
 		CE2695342B15CEBB00C9032D /* AstarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2695332B15CEBB00C9032D /* AstarViewModel.swift */; };
 		CE2695362B15CECD00C9032D /* AstarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2695352B15CECD00C9032D /* AstarModel.swift */; };
+		CE2695382B15F06F00C9032D /* AstarSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2695372B15F06F00C9032D /* AstarSearch.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		CE2695312B15CE6E00C9032D /* AstarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstarView.swift; sourceTree = "<group>"; };
 		CE2695332B15CEBB00C9032D /* AstarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstarViewModel.swift; sourceTree = "<group>"; };
 		CE2695352B15CECD00C9032D /* AstarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstarModel.swift; sourceTree = "<group>"; };
+		CE2695372B15F06F00C9032D /* AstarSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstarSearch.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				CE2695352B15CECD00C9032D /* AstarModel.swift */,
+				CE2695372B15F06F00C9032D /* AstarSearch.swift */,
 			);
 			path = AstarModel;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 				CE2695322B15CE6E00C9032D /* AstarView.swift in Sources */,
 				CE26951E2B148BF700C9032D /* AstarViewController.swift in Sources */,
 				CE2695362B15CECD00C9032D /* AstarModel.swift in Sources */,
+				CE2695382B15F06F00C9032D /* AstarSearch.swift in Sources */,
 				CE2695342B15CEBB00C9032D /* AstarViewModel.swift in Sources */,
 				CE26951A2B148BF700C9032D /* AppDelegate.swift in Sources */,
 			);
