@@ -122,8 +122,15 @@ class ViewController: UIViewController {
     @objc func startButtonTapped(_ sender: UIButton) {
         graph.clearPath()
         updateGraphView()
-        dfs.search()
+        let path = dfs.search()
+        if path.isEmpty || graph.targetIndex == nil || path.last! != graph.targetIndex! {
+            print("target is not reachable form start")
+        }
+        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        print(path)
+        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         updateGraphView()
+        animateOrange(path: path)
     }
     
     @objc func clearButtonTapped(_ sender: UIButton) {
@@ -212,6 +219,14 @@ class ViewController: UIViewController {
         return (i, j)
     }
     
+    func animateOrange(path: [(Int, Int)]) {
+        for (i, j) in path {
+            nodeButton.animate(withDuration: 1, delay: 1) {
+                self.nodeButtons[i][j].backgroundColor = .orange
+            }
+        }
+    }
+    
     func updateGraphView() {
         for i in 0..<graph.size {
             for j in 0..<graph.size {
@@ -285,9 +300,7 @@ class nodeButton: UIButton {
         case .path:
             backgroundColor = .orange
         case .visited:
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                self.backgroundColor = .yellow
-            }
+            self.backgroundColor = .yellow
         }
     }
     

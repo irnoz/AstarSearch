@@ -21,7 +21,10 @@ class DFSSearch {
     // Function to check if mat[row][col]
     // is unvisited and lies within the
     // boundary of the given matrix
-    func isValid(_ row: Int, _ col: Int) -> Bool {
+    func isValid(node current: (Int, Int)) -> Bool {
+        let row = current.0
+        let col = current.1
+        
         // If cell is out of bounds
         if row < 0 || col < 0 || row >= graph.size || col >= graph.size {
             return false
@@ -38,39 +41,34 @@ class DFSSearch {
 
     // Function to perform DFS
     // Traversal on the matrix grid[]
-    func DFS(from start: (Int, Int), to target: (Int, Int),_ row: Int, _ col: Int, _ grid: [[Node]]) {
+    func DFS(from start: (Int, Int), to target: (Int, Int), in graph: [[Node]]) -> [(Int, Int)]{
         // Initialize a stack of tuples and
         // push the starting cell into it
-        
-        var stack = [(row, col)]
+        var stack = [start]
+        var path = [(Int, Int)]()
 
         // Iterate until the
         // stack is not empty
         while !stack.isEmpty{
             // Pop the top tuple
-            let curr = stack.removeLast()
-            let row = curr.0
-            let col = curr.1
-            
-            if curr == target {
-                break
-            }
-            
+            let current = stack.removeLast()
+            let row = current.0
+            let col = current.1
 
             // Check if the current popped
             // cell is a valid cell or not
-            if !isValid(row, col) {
+            if !isValid(node: current) {
                 continue
             }
 
             // Mark the current
             // cell as visited
-            
-            graph.nodes[row][col].isPath = true
+            graph[row][col].isPath = true
+            path.append(current)
 
             // Print the element at
             // the current top cell
-            print("\(row), \(col): \(grid[row][col].isPath) ", terminator: "")
+            print("\(row), \(col): \(graph[row][col].isPath) ", terminator: "")
 
             // Push all the adjacent cells
             for i in 0..<4 {
@@ -78,23 +76,24 @@ class DFSSearch {
                 let adjy = col + dCol[i]
                 stack.append((adjx, adjy))
                 if (adjx, adjy) == target {
-                    return
+                    path.removeFirst()
+                    return path
                 }
             }
         }
+        path.removeFirst()
+        return path
     }
 
-    // Stores whether the current
-    // cell is visited or not
-    
-
     // Function call
-    func search() {
+    func search() -> [(Int, Int)] {
+        var path = [(Int, Int)]()
         guard let start = graph.startIndex,
               let target = graph.targetIndex
         else {
-            return
+            return path
         }
-        DFS(from: start, to: target, graph.startIndex!.0, graph.startIndex!.1, graph.nodes)
+        path = DFS(from: start, to: target, in: graph.nodes)
+        return path
     }
 }
