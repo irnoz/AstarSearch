@@ -220,10 +220,13 @@ class ViewController: UIViewController {
     }
     
     func animateOrange(path: [(Int, Int)]) {
+        var k = 0
         for (i, j) in path {
-            nodeButton.animate(withDuration: 1, delay: 1) {
+            k += 1
+            UIView.animate(withDuration: 0.4, delay: TimeInterval(k)) {
                 self.nodeButtons[i][j].backgroundColor = .orange
             }
+            
         }
     }
     
