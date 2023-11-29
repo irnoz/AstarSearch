@@ -32,6 +32,8 @@ class Graph {
                 node.isBlocked = false
                 node.isStart = false
                 node.isTarget = false
+                
+                node.isPath = false
             }
         }
     }
@@ -57,12 +59,21 @@ class Graph {
                 }
             }
         }
+        printGraph()
+    }
+    
+    func clearPath() {
+        for nodesRow in nodes {
+            for node in nodesRow {
+                node.isPath = false
+            }
+        }
     }
     
     func printGraph() {
-        for arr in nodes {
-            for node in arr {
-                print("\(node.isBlocked) ", separator: " ", terminator: "")
+        for i in 0..<size {
+            for j in 0..<size {
+                print("\(nodes[i][j].isBlocked) (\(i), \(j)) ", separator: "", terminator: "")
             }
             print()
         }
@@ -73,6 +84,10 @@ class Node {
     var isBlocked: Bool = false
     var isStart: Bool = false
     var isTarget: Bool = false
+    var isPath: Bool = false
+    var eucledeanDistance = Int.max
+    var manhattanDistance = Int.max
+    var heuristicDistance = Int.max
     func toggle() {
         self.isBlocked = !isBlocked
     }
