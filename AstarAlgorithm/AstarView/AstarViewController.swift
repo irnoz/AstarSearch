@@ -69,19 +69,10 @@ class ViewController: UIViewController {
         for row in 0..<graph.size{
             var nodeButtonsRow = [nodeButton]()
             for col in 0..<graph.size {
-                let node = nodeButton(row: row, section: col, selectedState: .defaultstate)
+                let node = nodeButton(row: row, section: col, selectedState: .defaultState)
                 node.buttonTapped = { [unowned self] in
                     configureButtonState(node: node)
                 }
-                //                node.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-                //                node.setTitle("\(row), \(col)", for: .normal)
-                //                let frame = CGRect(x: col * width, y: row * height, width: width, height: height)
-                //                node.frame = frame
-                //                node.backgroundColor = .white
-                //                node.layer.cornerRadius = 5
-                //                node.layer.borderWidth = 1
-                //                node.layer.borderColor = UIColor.black.cgColor
-                //                node.setTitleColor(.clear, for: .normal)
                 
                 nodesView.addSubview(node)
                 
@@ -146,68 +137,36 @@ class ViewController: UIViewController {
     
     func configureButtonState(node: nodeButton) {
         if node.selectedState == .start {
-            node.selectedState = .defaultstate
+            node.selectedState = .defaultState
             graph.startIndex = nil
-            graph.nodes[node.row][node.section].isStart = false
+            graph.nodes[node.row][node.section].state = .defaultState
         } else if node.selectedState == .target {
-            node.selectedState = .defaultstate
+            node.selectedState = .defaultState
             graph.targetIndex = nil
-            graph.nodes[node.row][node.section].isTarget = false
+            graph.nodes[node.row][node.section].state = .defaultState
         } else {
             if graph.startIndex == nil {
                 node.selectedState = .start
                 graph.startIndex = (node.row, node.section)
-                graph.nodes[node.row][node.section].isStart = true
+                graph.nodes[node.row][node.section].state = .start
             } else if graph.targetIndex == nil {
                 node.selectedState = .target
                 graph.targetIndex = (node.row, node.section)
-                graph.nodes[node.row][node.section].isTarget = true
+                graph.nodes[node.row][node.section].state = .target
             } else {
-                if node.selectedState == .defaultstate {
+                if node.selectedState == .defaultState {
                     node.selectedState = .blocked
-                    graph.nodes[node.row][node.section].isBlocked = true
+                    graph.nodes[node.row][node.section].state = .blocked
                 } else {
-                    node.selectedState = .defaultstate
-                    graph.nodes[node.row][node.section].isBlocked = false
+                    node.selectedState = .defaultState
+                    graph.nodes[node.row][node.section].state = .defaultState
                 }
             }
         }
     }
     
-    @objc func nodeTapped(_ sender: UIButton) {
-        guard let titleLabel = sender.titleLabel?.text,
-              let currentIndex = getIndex(title: titleLabel) else {
-            return
-        }
-        if sender.backgroundColor == .green {
-            sender.backgroundColor = .white
-            graph.startIndex = nil
-            graph.nodes[currentIndex.0][currentIndex.1].isStart = true
-        } else if sender.backgroundColor == .red {
-            sender.backgroundColor = .white
-            graph.targetIndex = nil
-            graph.nodes[currentIndex.0][currentIndex.1].isStart = false
-        } else {
-            if graph.startIndex == nil {
-                sender.backgroundColor = .green
-                graph.startIndex = currentIndex
-                graph.nodes[currentIndex.0][currentIndex.1].isTarget = true
-            } else if graph.targetIndex == nil {
-                sender.backgroundColor = .red
-                graph.targetIndex = currentIndex
-                graph.nodes[currentIndex.0][currentIndex.1].isTarget = false
-            } else {
-                if sender.backgroundColor == .white {
-                    sender.backgroundColor = .purple
-                    graph.nodes[currentIndex.0][currentIndex.1].isBlocked = true
-                } else {
-                    sender.backgroundColor = .white
-                    graph.nodes[currentIndex.0][currentIndex.1].isBlocked = false
-                }
-            }
-        }
-        
-        //        print("\(currentIndex) \(graph.nodes[currentIndex.0][currentIndex.1].isBlocked)")
+    @objc func nodeTapped(_ sender: nodeButton) {
+        configureButtonState(node: sender)
     }
     
     private func getIndex(title: String) -> (Int, Int)? {
@@ -220,10 +179,10 @@ class ViewController: UIViewController {
     }
     
     func animateOrange(path: [(Int, Int)]) {
-        var k = 0
+        var k = 0.0
         for (i, j) in path {
             k += 1
-            UIView.animate(withDuration: 0.4, delay: TimeInterval(k)) {
+            UIView.animate(withDuration: 0.3, delay: TimeInterval(k * 0.5)) {
                 self.nodeButtons[i][j].backgroundColor = .orange
             }
             
@@ -233,20 +192,23 @@ class ViewController: UIViewController {
     func updateGraphView() {
         for i in 0..<graph.size {
             for j in 0..<graph.size {
-                if graph.nodes[i][j].isBlocked {
-                    nodeButtons[i][j].selectedState = .blocked
-                } else if graph.nodes[i][j].isStart {
-                    nodeButtons[i][j].selectedState = .start
-                } else if graph.nodes[i][j].isTarget {
-                    nodeButtons[i][j].selectedState = .target
-                } else if graph.nodes[i][j].isPath {
-                    nodeButtons[i][j].selectedState = .visited
-                } else {
-                    nodeButtons[i][j].selectedState = .defaultstate
-                }
+//                if graph.nodes[i][j].state == .blocked {
+//                    nodeButtons[i][j].selectedState = .blocked
+//                } else if graph.nodes[i][j].state == .start {
+//                    nodeButtons[i][j].selectedState = .start
+//                } else if graph.nodes[i][j].state == .target {
+//                    nodeButtons[i][j].selectedState = .target
+//                } else if graph.nodes[i][j].state == .path {
+//                    nodeButtons[i][j].selectedState = .path
+//                } else if graph.nodes[i][j].state == .visited {
+//                    nodeButtons[i][j].selectedState = .visited
+//                } else {
+//                    nodeButtons[i][j].selectedState = .defaultstate
+//                }
+                nodeButtons[i][j].selectedState = graph.nodes[i][j].state
                 
                 nodeButtons[i][j].buttonStateConfigure()
-                
+                print(nodeButtons[i][j].state, graph.nodes[i][j].state)
             }
         }
     }
@@ -267,13 +229,12 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 }
 
 class nodeButton: UIButton {
-    
     let row: Int
     let section: Int
-    var selectedState: selectedButtonStates
+    var selectedState: NodeStates
     var buttonTapped: (() -> ())?
     
-    init(row: Int, section: Int, selectedState: selectedButtonStates) {
+    init(row: Int, section: Int, selectedState: NodeStates) {
         self.row = row
         self.section = section
         self.selectedState = selectedState
@@ -281,6 +242,7 @@ class nodeButton: UIButton {
         configureUI()
         buttonStateConfigure()
     }
+    
     func configureUI() {
         titleLabel?.font = UIFont.systemFont(ofSize: 16)
         frame = CGRect(x: section * 25, y: row * 25, width: 25, height: 25)
@@ -290,9 +252,10 @@ class nodeButton: UIButton {
         setTitleColor(.clear, for: .normal)
         addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
     }
+    
     func buttonStateConfigure() {
         switch selectedState {
-        case .defaultstate:
+        case .defaultState:
             backgroundColor = .white
         case .start:
             backgroundColor = .green
@@ -317,11 +280,11 @@ class nodeButton: UIButton {
     }
 }
 
-enum selectedButtonStates {
-    case defaultstate
-    case start
-    case target
-    case blocked
-    case path
-    case visited
-}
+//enum SelectedButtonStates {
+//    case defaultState
+//    case start
+//    case target
+//    case blocked
+//    case path
+//    case visited
+//}

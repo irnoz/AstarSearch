@@ -18,7 +18,7 @@ class Graph {
         for _ in 0..<size {
             var nodeArr = [Node]()
             for _ in 0..<size {
-              nodeArr.append(Node())
+                nodeArr.append(Node(state: .defaultState))
             }
             self.nodes.append(nodeArr)
         }
@@ -29,11 +29,7 @@ class Graph {
         targetIndex = nil
         for nodesRow in nodes {
             for node in nodesRow {
-                node.isBlocked = false
-                node.isStart = false
-                node.isTarget = false
-                
-                node.isPath = false
+                node.state = .defaultState
             }
         }
     }
@@ -44,18 +40,19 @@ class Graph {
         startIndex = (Int.random(in: 0..<size), Int.random(in: 0..<size))
         targetIndex = (Int.random(in: 0..<size), Int.random(in: 0..<size))
         
-        guard let startIndex,
-              let targetIndex
-        else { 
+        guard let startIndex, let targetIndex else {
             return
         }
         
-        nodes[startIndex.0][startIndex.1].isStart = true
-        nodes[targetIndex.0][targetIndex.1].isTarget = true
+        nodes[startIndex.0][startIndex.1].state = .start
+        nodes[targetIndex.0][targetIndex.1].state = .target
+        
         for i in 0..<size {
             for j in 0..<size {
-                if !nodes[i][j].isStart && !nodes[i][j].isTarget {
-                    nodes[i][j].isBlocked = (Int.random(in: 0...10) < 4)
+                if nodes[i][j].state != .start && nodes[i][j].state != .target {
+                    if Int.random(in: 0...10) < 3 {
+                        nodes[i][j].state = .blocked
+                    }
                 }
             }
         }
@@ -65,7 +62,10 @@ class Graph {
     func clearPath() {
         for nodesRow in nodes {
             for node in nodesRow {
-                node.isPath = false
+                if node.state == .path || node.state == .visited {
+                    node.state = .defaultState
+                }
+                
             }
         }
     }
@@ -73,7 +73,7 @@ class Graph {
     func printGraph() {
         for i in 0..<size {
             for j in 0..<size {
-                print("\(nodes[i][j].isBlocked) (\(i), \(j)) ", separator: "", terminator: "")
+                print("\(nodes[i][j].state) (\(i), \(j)) ", separator: "", terminator: "")
             }
             print()
         }
@@ -81,14 +81,34 @@ class Graph {
 }
 
 class Node {
-    var isBlocked: Bool = false
-    var isStart: Bool = false
-    var isTarget: Bool = false
-    var isPath: Bool = false
+//    var isBlocked: Bool = false
+//    var isStart: Bool = false
+//    var isTarget: Bool = false
+//    var isPath: Bool = false
+    
+    var state: NodeStates
     var eucledeanDistance = Int.max
     var manhattanDistance = Int.max
     var heuristicDistance = Int.max
-    func toggle() {
-        self.isBlocked = !isBlocked
+    
+    init(state: NodeStates) {
+        self.state = .defaultState
     }
+    
+//    func toggle() {
+//        self.isBlocked = !isBlocked
+//    }
+    
+    func configureState() {
+        
+    }
+}
+
+enum NodeStates {
+    case defaultState
+    case start
+    case target
+    case blocked
+    case path
+    case visited
 }

@@ -18,10 +18,10 @@ class DFSSearch {
     let dRow = [0, 1, 0, -1]
     let dCol = [-1, 0, 1, 0]
 
-    // Function to check if mat[row][col]
+    // Function to check if graph[row][col]
     // is unvisited and lies within the
     // boundary of the given matrix
-    func isValid(node current: (Int, Int)) -> Bool {
+    private func isValid(node current: (Int, Int)) -> Bool {
         let row = current.0
         let col = current.1
         
@@ -31,7 +31,7 @@ class DFSSearch {
         }
 
         // If the cell is already visited
-        if graph.nodes[row][col].isPath || graph.nodes[row][col].isBlocked {
+        if graph.nodes[row][col].state == .visited || graph.nodes[row][col].state == .blocked {
             return false
         }
 
@@ -41,7 +41,7 @@ class DFSSearch {
 
     // Function to perform DFS
     // Traversal on the matrix grid[]
-    func DFS(from start: (Int, Int), to target: (Int, Int), in graph: [[Node]]) -> [(Int, Int)]{
+    private func DFS(from start: (Int, Int), to target: (Int, Int), in graph: [[Node]]) -> [(Int, Int)]{
         // Initialize a stack of tuples and
         // push the starting cell into it
         var stack = [start]
@@ -49,7 +49,7 @@ class DFSSearch {
 
         // Iterate until the
         // stack is not empty
-        while !stack.isEmpty{
+        while !stack.isEmpty {
             // Pop the top tuple
             let current = stack.removeLast()
             let row = current.0
@@ -63,12 +63,13 @@ class DFSSearch {
 
             // Mark the current
             // cell as visited
-            graph[row][col].isPath = true
-            path.append(current)
-
+            if (current != target && current != start) {
+                graph[row][col].state = .visited
+                path.append(current)
+            }
             // Print the element at
             // the current top cell
-            print("\(row), \(col): \(graph[row][col].isPath) ", terminator: "")
+            print("\(row), \(col): \(graph[row][col].state) ", terminator: "")
 
             // Push all the adjacent cells
             for i in 0..<4 {
@@ -76,12 +77,11 @@ class DFSSearch {
                 let adjy = col + dCol[i]
                 stack.append((adjx, adjy))
                 if (adjx, adjy) == target {
-                    path.removeFirst()
                     return path
                 }
             }
         }
-        path.removeFirst()
+        
         return path
     }
 
