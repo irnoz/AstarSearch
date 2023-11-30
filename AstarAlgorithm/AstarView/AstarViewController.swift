@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     // MARK: Properties
     var algorithmNameLabel: UILabel!
     var algorithmPicker: UIPickerView!
-    var nodeButtons = [[nodeButton]]()
+    var nodeButtons = [[NodeButton]]()
     var selectedIndexes: [IndexPath] = [IndexPath(row: 0, section: 0)]
     var graph = Graph(withSize: 10)
     var counter = 1.0
@@ -67,9 +67,9 @@ class ViewController: UIViewController {
         let height = 25
         
         for row in 0..<graph.size{
-            var nodeButtonsRow = [nodeButton]()
+            var nodeButtonsRow = [NodeButton]()
             for col in 0..<graph.size {
-                let node = nodeButton(row: row, section: col, selectedState: .defaultState)
+                let node = NodeButton(row: row, section: col, selectedState: .defaultState)
                 node.buttonTapped = { [unowned self] in
                     configureButtonState(node: node)
                 }
@@ -135,7 +135,7 @@ class ViewController: UIViewController {
         updateGraphView()
     }
     
-    func configureButtonState(node: nodeButton) {
+    func configureButtonState(node: NodeButton) {
         if node.selectedState == .start {
             node.selectedState = .defaultState
             graph.startIndex = nil
@@ -165,7 +165,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @objc func nodeTapped(_ sender: nodeButton) {
+    @objc func nodeTapped(_ sender: NodeButton) {
         configureButtonState(node: sender)
     }
     
@@ -182,7 +182,7 @@ class ViewController: UIViewController {
         var k = 0.0
         for (i, j) in path {
             k += 1
-            UIView.animate(withDuration: 0.3, delay: TimeInterval(k * 0.5)) {
+            UIView.animate(withDuration: 0.3, delay: TimeInterval(k*0.2)) {
                 self.nodeButtons[i][j].backgroundColor = .orange
             }
             
@@ -228,7 +228,7 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 }
 
-class nodeButton: UIButton {
+class NodeButton: UIButton {
     let row: Int
     let section: Int
     var selectedState: NodeStates
