@@ -75,8 +75,7 @@ class ViewController: UIViewController {
                 }
                 
                 nodesView.addSubview(node)
-                
-                node.addTarget(self, action: #selector(nodeTapped), for: .touchUpInside)
+//                node.addTarget(self, action: #selector(nodeTapped), for: .touchUpInside)
                 nodeButtonsRow.append(node)
             }
             nodeButtons.append(nodeButtonsRow)
@@ -165,9 +164,14 @@ class ViewController: UIViewController {
         }
     }
     
-    @objc func nodeTapped(_ sender: NodeButton) {
-        configureButtonState(node: sender)
-    }
+//    @objc func nodeTapped(_ sender: NodeButton) {
+//        guard let titleLabel = sender.titleLabel?.text,
+//              let currentIndex = getIndex(title: "1, 1"/*titleLabel*/) else {
+//            return
+//        }
+//        
+//        configureButtonState(node: sender)
+//    }
     
     private func getIndex(title: String) -> (Int, Int)? {
         guard let i = title.first?.wholeNumberValue,
@@ -192,23 +196,10 @@ class ViewController: UIViewController {
     func updateGraphView() {
         for i in 0..<graph.size {
             for j in 0..<graph.size {
-//                if graph.nodes[i][j].state == .blocked {
-//                    nodeButtons[i][j].selectedState = .blocked
-//                } else if graph.nodes[i][j].state == .start {
-//                    nodeButtons[i][j].selectedState = .start
-//                } else if graph.nodes[i][j].state == .target {
-//                    nodeButtons[i][j].selectedState = .target
-//                } else if graph.nodes[i][j].state == .path {
-//                    nodeButtons[i][j].selectedState = .path
-//                } else if graph.nodes[i][j].state == .visited {
-//                    nodeButtons[i][j].selectedState = .visited
-//                } else {
-//                    nodeButtons[i][j].selectedState = .defaultstate
-//                }
                 nodeButtons[i][j].selectedState = graph.nodes[i][j].state
                 
                 nodeButtons[i][j].buttonStateConfigure()
-                print(nodeButtons[i][j].state, graph.nodes[i][j].state)
+                print(nodeButtons[i][j].selectedState, graph.nodes[i][j].state)
             }
         }
     }
