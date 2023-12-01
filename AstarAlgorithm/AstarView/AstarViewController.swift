@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         algorithmNameLabel.translatesAutoresizingMaskIntoConstraints = false
         algorithmNameLabel.textAlignment = .center
         algorithmNameLabel.font = UIFont.systemFont(ofSize: 22)
-        algorithmNameLabel.text = "Astar Search"
+        algorithmNameLabel.text = "Pathfinding algorithms"
         view.addSubview(algorithmNameLabel)
         
         algorithmPicker = UIPickerView()
@@ -112,6 +112,7 @@ class ViewController: UIViewController {
     // MARK: Methods
     @objc func startButtonTapped(_ sender: UIButton) {
         graph.clearPath()
+        nukeAllAnimations()
         updateGraphView()
         
         let alg = algorithmPicker.selectedRow(inComponent: 0)
@@ -133,11 +134,13 @@ class ViewController: UIViewController {
     }
     
     @objc func clearButtonTapped(_ sender: UIButton) {
+        nukeAllAnimations()
         graph.clear()
         updateGraphView()
     }
     
     @objc func generateButtonTapped(_ sender: UIButton) {
+        nukeAllAnimations()
         graph.clear()
         graph.generate()
         updateGraphView()
@@ -191,6 +194,14 @@ class ViewController: UIViewController {
         return (i, j)
     }
     
+    func nukeAllAnimations() {
+        for buttonsRow in nodeButtons {
+            for button in buttonsRow {
+                button.layer.removeAllAnimations()
+            }
+        }
+    }
+    
     func animateOrange(path: [(Int, Int)]) {
         var k = 0.0
         for (i, j) in path {
@@ -198,16 +209,18 @@ class ViewController: UIViewController {
             UIView.animate(withDuration: 0.3, delay: TimeInterval(k*0.2)) {
                 self.nodeButtons[i][j].backgroundColor = .orange
             }
-            
         }
     }
     
     func updateGraphView() {
         for i in 0..<graph.size {
             for j in 0..<graph.size {
-                nodeButtons[i][j].selectedState = graph.nodes[i][j].state
+                UIView.performWithoutAnimation {
+                    nodeButtons[i][j].selectedState = graph.nodes[i][j].state
+                    
+                    nodeButtons[i][j].buttonStateConfigure()
+                }
                 
-                nodeButtons[i][j].buttonStateConfigure()
 //                print(nodeButtons[i][j].selectedState, graph.nodes[i][j].state)
             }
         }
@@ -240,7 +253,7 @@ class NodeButton: UIButton {
         self.selectedState = selectedState
         super.init(frame: .zero)
         configureUI()
-        buttonStateConfigure()
+        buttonStateConfigure() 
     }
     
     func configureUI() {
@@ -279,12 +292,3 @@ class NodeButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
-//enum SelectedButtonStates {
-//    case defaultState
-//    case start
-//    case target
-//    case blocked
-//    case path
-//    case visited
-//}
