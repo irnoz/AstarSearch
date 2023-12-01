@@ -16,6 +16,7 @@
 		CE2695362B15CECD00C9032D /* AstarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2695352B15CECD00C9032D /* AstarModel.swift */; };
 		CE2695382B15F06F00C9032D /* AstarSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2695372B15F06F00C9032D /* AstarSearch.swift */; };
 		CE26953A2B17376600C9032D /* DFSSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2695392B17376600C9032D /* DFSSearch.swift */; };
+		CE7725DB2B19BA92003FCEDD /* BFSSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7725DA2B19BA92003FCEDD /* BFSSearch.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		CE2695352B15CECD00C9032D /* AstarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstarModel.swift; sourceTree = "<group>"; };
 		CE2695372B15F06F00C9032D /* AstarSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstarSearch.swift; sourceTree = "<group>"; };
 		CE2695392B17376600C9032D /* DFSSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFSSearch.swift; sourceTree = "<group>"; };
+		CE7725DA2B19BA92003FCEDD /* BFSSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BFSSearch.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 				CE2695352B15CECD00C9032D /* AstarModel.swift */,
 				CE2695372B15F06F00C9032D /* AstarSearch.swift */,
 				CE2695392B17376600C9032D /* DFSSearch.swift */,
+				CE7725DA2B19BA92003FCEDD /* BFSSearch.swift */,
 			);
 			path = AstarModel;
 			sourceTree = "<group>";
@@ -181,6 +184,7 @@
 				CE2695322B15CE6E00C9032D /* AstarView.swift in Sources */,
 				CE26951E2B148BF700C9032D /* AstarViewController.swift in Sources */,
 				CE2695362B15CECD00C9032D /* AstarModel.swift in Sources */,
+				CE7725DB2B19BA92003FCEDD /* BFSSearch.swift in Sources */,
 				CE2695382B15F06F00C9032D /* AstarSearch.swift in Sources */,
 				CE2695342B15CEBB00C9032D /* AstarViewModel.swift in Sources */,
 				CE26953A2B17376600C9032D /* DFSSearch.swift in Sources */,

@@ -50,7 +50,7 @@ class Graph {
         for i in 0..<size {
             for j in 0..<size {
                 if nodes[i][j].state != .start && nodes[i][j].state != .target {
-                    if Int.random(in: 0...10) < 3 {
+                    if Int.random(in: 0...10) < 4 {
                         nodes[i][j].state = .blocked
                     }
                 }

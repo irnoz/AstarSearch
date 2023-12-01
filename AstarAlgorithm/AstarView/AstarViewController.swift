@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     var graph = Graph(withSize: 10)
     var counter = 1.0
     lazy var dfs = DFSSearch(graph: graph)
+    lazy var bfs = BFSSearch(graph: graph)
     
     var algorithms = ["Astar", "DFS", "BFS"]
     
@@ -112,7 +113,8 @@ class ViewController: UIViewController {
     @objc func startButtonTapped(_ sender: UIButton) {
         graph.clearPath()
         updateGraphView()
-        let path = dfs.search()
+//        let path = dfs.search()
+        let path = bfs.search()
         if path.isEmpty || graph.targetIndex == nil || path.last! != graph.targetIndex! {
             print("target is not reachable form start")
         }

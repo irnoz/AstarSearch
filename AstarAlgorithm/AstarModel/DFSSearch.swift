@@ -35,12 +35,9 @@ class DFSSearch {
             return false
         }
 
-        // Otherwise, it can be visited
         return true
     }
-
-    // Function to perform DFS
-    // Traversal on the matrix grid[]
+    
     private func DFS(from start: (Int, Int), to target: (Int, Int), in graph: [[Node]]) -> [(Int, Int)]{
         // Initialize a stack of tuples and
         // push the starting cell into it
@@ -95,5 +92,28 @@ class DFSSearch {
         }
         path = DFS(from: start, to: target, in: graph.nodes)
         return path
+    }
+}
+
+
+struct Stack<T> {
+    private var items: [T] = []
+    
+    func peek() -> T {
+        guard let topElement = items.first else {
+            fatalError("This stack is empty.")
+        }
+        return topElement
+    }
+    
+    mutating func pop() -> T {
+        guard !items.isEmpty else {
+            fatalError("This stack is empty.")
+        }
+        return items.removeFirst()
+    }
+  
+    mutating func push(_ element: T) {
+        items.insert(element, at: 0)
     }
 }
