@@ -130,7 +130,7 @@ class ViewController: UIViewController {
             print("target is not reachable form start")
         }
         updateGraphView()
-        animateOrange(path: path)
+        trace(path: path)
     }
     
     @objc func clearButtonTapped(_ sender: UIButton) {
@@ -202,7 +202,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func animateOrange(path: [(Int, Int)]) {
+    func trace(path: [(Int, Int)]) {
         var k = 0.0
         for (i, j) in path {
             k += 1

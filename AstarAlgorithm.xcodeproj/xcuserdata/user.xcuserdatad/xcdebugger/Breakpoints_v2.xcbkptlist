@@ -7,54 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "78A2D292-1FF0-4DC9-85E4-908A077B7F21"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AstarAlgorithm/AstarView/AstarViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "210"
-            endingLineNumber = "210"
-            landmarkName = "animateOrange(path:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "78A2D292-1FF0-4DC9-85E4-908A077B7F21 - dd98c0b57ce493a7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in AstarAlgorithm.ViewController.animateOrange(path: Swift.Array&lt;(Swift.Int, Swift.Int)&gt;) -&gt; ()"
-                  moduleName = "AstarAlgorithm"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/user/Learn/AstarAlgorithm/AstarAlgorithm/AstarView/AstarViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "192"
-                  endingLineNumber = "192"
-                  offsetFromSymbolStart = "56">
-               </Location>
-               <Location
-                  uuid = "78A2D292-1FF0-4DC9-85E4-908A077B7F21 - dd98c0b57ce48d10"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in AstarAlgorithm.ViewController.animateOrange(path: Swift.Array&lt;(Swift.Int, Swift.Int)&gt;) -&gt; ()"
-                  moduleName = "AstarAlgorithm"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/user/Learn/AstarAlgorithm/AstarAlgorithm/AstarView/AstarViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "205"
-                  endingLineNumber = "205"
-                  offsetFromSymbolStart = "56">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "4689A168-10AC-4574-BE4E-9727DB4E56EC"
             shouldBeEnabled = "No"
             ignoreCount = "0"
