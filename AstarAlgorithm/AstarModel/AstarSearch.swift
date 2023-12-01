@@ -26,6 +26,10 @@ class AstarSearch {
         
     }
     
+    private func setHeuristicDistance(from start: (Int, Int), to target: (Int, Int), in graph: [[Node]]) {
+        
+    }
+    
     private func aStarSearch(from start: (Int, Int), to target: (Int, Int), in graph: [[Node]]) -> [(Int, Int)] {
         var path: [(Int, Int)] = []
         
