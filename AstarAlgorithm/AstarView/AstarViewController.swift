@@ -113,14 +113,21 @@ class ViewController: UIViewController {
     @objc func startButtonTapped(_ sender: UIButton) {
         graph.clearPath()
         updateGraphView()
-//        let path = dfs.search()
-        let path = bfs.search()
-        if path.isEmpty || graph.targetIndex == nil || path.last! != graph.targetIndex! {
+        
+        let alg = algorithmPicker.selectedRow(inComponent: 0)
+        var path: [(Int, Int)] = []
+        switch alg {
+        case 1:
+            path = dfs.search()
+        case 2:
+            path = bfs.search()
+        default:
+            print("astar not yet implementd")
+        }
+        
+        if path.isEmpty || path.last! != graph.targetIndex! {
             print("target is not reachable form start")
         }
-        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        print(path)
-        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         updateGraphView()
         animateOrange(path: path)
     }
@@ -201,7 +208,7 @@ class ViewController: UIViewController {
                 nodeButtons[i][j].selectedState = graph.nodes[i][j].state
                 
                 nodeButtons[i][j].buttonStateConfigure()
-                print(nodeButtons[i][j].selectedState, graph.nodes[i][j].state)
+//                print(nodeButtons[i][j].selectedState, graph.nodes[i][j].state)
             }
         }
     }

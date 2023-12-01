@@ -81,11 +81,6 @@ class Graph {
 }
 
 class Node {
-//    var isBlocked: Bool = false
-//    var isStart: Bool = false
-//    var isTarget: Bool = false
-//    var isPath: Bool = false
-    
     var state: NodeStates
     var eucledeanDistance = Int.max
     var manhattanDistance = Int.max
@@ -94,10 +89,6 @@ class Node {
     init(state: NodeStates) {
         self.state = .defaultState
     }
-    
-//    func toggle() {
-//        self.isBlocked = !isBlocked
-//    }
     
     func configureState() {
         

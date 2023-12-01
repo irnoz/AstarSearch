@@ -68,7 +68,8 @@ class DFSSearch {
             // the current top cell
             print("\(row), \(col): \(graph[row][col].state) ", terminator: "")
 
-            // Push all the adjacent cells
+            // Push all the adjacent 
+            // cells in stack
             for i in 0..<4 {
                 let adjx = row + dRow[i]
                 let adjy = col + dCol[i]
