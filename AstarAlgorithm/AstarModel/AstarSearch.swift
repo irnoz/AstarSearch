@@ -59,10 +59,14 @@ class AstarSearch {
     }
     
     private func aStarSearch(from start: (Int, Int), to target: (Int, Int), in graph: [[Node]]) -> [(Int, Int)] {
+        // initialise path and heap
         var path: [(Int, Int)] = []
         var heap: Heap<Node> = .init(elements: [], priorityFunction: {
             $0.heuristicDistance < $1.heuristicDistance
         })
+        
+        // set heuristic distance
+        // from target to each node
         setHeuristicDistance(from: target, in: graph)
         
         

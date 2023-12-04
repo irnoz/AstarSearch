@@ -86,6 +86,7 @@ class Graph {
 class Node {
     var state: NodeStates
     var fullDistance = Int.max
+    var manhattanDistance = Int.max
     var heuristicDistance = Int.max
     
     init(state: NodeStates) {
