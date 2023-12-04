@@ -167,16 +167,16 @@ struct Heap<Element> {
     // enqueue element
     mutating func enqueue(_ element: Element) {
         elements.append(element)
-        shiftUp(elementAtIndex: count - 1)
+        siftUp(elementAtIndex: count - 1)
     }
     
-    mutating func shiftUp(elementAtIndex index: Int) {
+    mutating func siftUp(elementAtIndex index: Int) {
         let parent = parentIndex(of: index)
         guard !isRoot(index),
               isHigherPriority(at: index, than: parent)
         else { return }
         swapElement(at: index, with: parent)
-        shiftUp(elementAtIndex: parent)
+        siftUp(elementAtIndex: parent)
     }
     
     // dequeue element
@@ -187,12 +187,12 @@ struct Heap<Element> {
         let element = elements.removeLast()
         
         if !isEmpty {
-            shiftDown(elementAtIndex: 0)
+            siftDown(elementAtIndex: 0)
         }
         return element
     }
     
-    mutating func shiftDown(elementAtIndex index: Int) {
+    mutating func siftDown(elementAtIndex index: Int) {
         let childIndex = hightestPriorityIndex(for: index)
         
         if index == childIndex {
@@ -200,6 +200,6 @@ struct Heap<Element> {
         }
         
         swapElement(at: index, with: childIndex)
-        shiftDown(elementAtIndex: index)
+        siftDown(elementAtIndex: index)
     }
 }
