@@ -15,10 +15,10 @@ class Graph {
     
     init(withSize size: Int = 10) {
         self.size = size
-        for _ in 0..<size {
+        for i in 0..<size {
             var nodeArr = [Node]()
-            for _ in 0..<size {
-                nodeArr.append(Node(state: .defaultState))
+            for j in 0..<size {
+                nodeArr.append(Node(state: .defaultState, row: i, col: j))
             }
             self.nodes.append(nodeArr)
         }
@@ -85,12 +85,16 @@ class Graph {
 
 class Node {
     var state: NodeStates
+    let row: Int
+    let col: Int
     var fullDistance = Int.max
     var manhattanDistance = Int.max
     var heuristicDistance = Int.max
     
-    init(state: NodeStates) {
+    init(state: NodeStates, row: Int, col: Int) {
         self.state = .defaultState
+        self.row = row
+        self.col = col
     }
     
     func configureState() {
