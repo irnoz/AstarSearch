@@ -66,7 +66,7 @@ class DFSSearch {
             }
             // Print the element at
             // the current top cell
-            print("\(row), \(col): \(graph[row][col].state) ", terminator: "")
+//            print("\(row), \(col): \(graph[row][col].state) ", terminator: "")
 
             // Push all the adjacent 
             // cells in stack
@@ -100,8 +100,12 @@ class DFSSearch {
 struct Stack<T> {
     private var items: [T] = []
     
+    var isEmpty: Bool {
+        return items.isEmpty
+    }
+    
     func peek() -> T {
-        guard let topElement = items.first else {
+        guard let topElement = items.last else {
             fatalError("This stack is empty.")
         }
         return topElement
@@ -111,10 +115,10 @@ struct Stack<T> {
         guard !items.isEmpty else {
             fatalError("This stack is empty.")
         }
-        return items.removeFirst()
+        return items.removeLast()
     }
   
     mutating func push(_ element: T) {
-        items.insert(element, at: 0)
+        items.append(element)
     }
 }

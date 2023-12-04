@@ -44,7 +44,7 @@ class BFSSearch {
         queue.enqueue(start)
         
         // Iterate until the
-        // queue is not empty
+        // queue is empty
         while !queue.isEmpty {
             // Get and remove first
             // element from queue

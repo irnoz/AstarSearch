@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     var counter = 1.0
     lazy var dfs = DFSSearch(graph: graph)
     lazy var bfs = BFSSearch(graph: graph)
+    lazy var aStar = AstarSearch(graph: graph)
     
     var algorithms = ["Astar", "DFS", "BFS"]
     
@@ -123,7 +124,7 @@ class ViewController: UIViewController {
         case 2:
             path = bfs.search()
         default:
-            print("astar not yet implementd")
+            path = aStar.search()
         }
         
         if path.isEmpty || path.last! != graph.targetIndex! {
