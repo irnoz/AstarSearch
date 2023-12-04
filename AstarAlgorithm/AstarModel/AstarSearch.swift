@@ -24,18 +24,19 @@ class AstarSearch {
         let row = current.0
         let col = current.1
         
-        // Check if cell is out of bounds
+        // If cell is out of bounds
         if row < 0 || col < 0 || row >= graph.size || col >= graph.size {
             return false
         }
 
-        // Check if the cell is already visited
-        if graph.nodes[row][col].heuristicDistance != Int.max {
+        // If the cell is already visited
+        if graph.nodes[row][col].state == .visited || graph.nodes[row][col].state == .blocked {
             return false
         }
 
         return true
     }
+    
     // Check if cell is out of bounds
     private func isInBounds(row: Int, col: Int) -> Bool {
         if row < 0 || col < 0 || row >= graph.size || col >= graph.size {
@@ -43,14 +44,6 @@ class AstarSearch {
         }
         return true
     }
-    
-//    private func setEucledeanDistance(from start: (Int, Int), to target: (Int, Int), in graph: [[Node]]) {
-//        
-//    }
-//    
-//    private func setManhattanDistance(from start: (Int, Int), to target: (Int, Int), in graph: [[Node]]) {
-//        
-//    }
     
     private func calculateManhattanDistance(from target: (Int, Int), to current: (Int, Int)) -> Int {
         return (abs(target.0 - current.0) + abs(target.1 - current.1)) * 10
