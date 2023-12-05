@@ -8,6 +8,8 @@
 import UIKit
 
 class AstarView: UIView {
+    
+    
     let algorithmNameLabel: UILabel = {
         let algorithmNameLabel = UILabel()
         algorithmNameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -37,6 +39,7 @@ class AstarView: UIView {
         let generateGraphButton = UIButton(type: .system)
         generateGraphButton.translatesAutoresizingMaskIntoConstraints = false
         generateGraphButton.setTitle("Generate", for: .normal)
+        
 //        generateGraphButton.addTarget(self, action: #selector(generateButtonTapped), for: .touchUpInside)
         return generateGraphButton
     }()
@@ -51,7 +54,18 @@ class AstarView: UIView {
 //        setup(with: <#T##Graph#>)
     }
     
-    func setup(with graph: Graph) {
-        
+        func setup(with model: AstarUIModel) {
+            generateGraphButton.addAction(UIAction(handler: { _ in
+                model.generateButtonHandler()
+            }), for: .touchUpInside)
     }
+}
+
+
+struct AstarUIModel {
+    var size: Int
+    var startButtonHandler: (() -> Void)
+    var clearButtonHandler: (() -> Void)
+    var generateButtonHandler: (() -> Void)
+    
 }

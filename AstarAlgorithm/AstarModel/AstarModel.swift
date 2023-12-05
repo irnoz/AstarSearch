@@ -30,6 +30,9 @@ class Graph {
         for nodesRow in nodes {
             for node in nodesRow {
                 node.state = .defaultState
+                node.manhattanDistance = Int.max
+                node.heuristicDistance = Int.max
+                node.fullDistance = Int.max
             }
         }
 //        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
