@@ -49,6 +49,18 @@ class AstarSearch {
         return (abs(target.0 - current.0) + abs(target.1 - current.1)) * 10
     }
     
+    private func setManhattanDistance(from start: (Int, Int), in graph: [[Node]]) {
+        let size = graph.count
+        for i in 0..<size {
+            for j in 0..<size {
+                if isValid(node: (i, j)) {
+                    graph[i][j].manhattanDistance = calculateManhattanDistance(from: start, to: (i, j))
+                    graph[i][j].fullDistance = graph[i][j].heuristicDistance + graph[i][j].manhattanDistance
+                }
+            }
+        }
+    }
+    
     private func setHeuristicDistance(from target: (Int, Int), in graph: [[Node]]) {
         let size = graph.count
         for i in 0..<size {
@@ -61,14 +73,54 @@ class AstarSearch {
     private func aStarSearch(from start: (Int, Int), to target: (Int, Int), in graph: [[Node]]) -> [(Int, Int)] {
         // initialise path and heap
         var path: [(Int, Int)] = []
-        var heap: Heap<Node> = .init(elements: [], priorityFunction: {
-            $0.heuristicDistance < $1.heuristicDistance
+        var heap: Heap<Node> = .init(elements: [graph[start.0][start.1]], priorityFunction: {
+            $0.fullDistance < $1.fullDistance
         })
         
-        // set heuristic distance
+        // Set heuristic distance
         // from target to each node
         setHeuristicDistance(from: target, in: graph)
+        setManhattanDistance(from: start, in: graph)
         
+        // Set real distance to start
+        graph[start.0][start.1].manhattanDistance = 0
+        graph[start.0][start.1].fullDistance = graph[start.0][start.1].heuristicDistance
+        
+        while !heap.isEmpty {
+            guard let current = heap.dequeue() else {
+                return path
+            }
+            let row = current.row
+            let col = current.col
+            let currentIndex = (row, col)
+            
+            if !isValid(node: (row, col)) {
+                continue
+            }
+            
+            // Mark the current
+            // cell as visited
+            if (currentIndex != target && currentIndex != start) {
+                graph[row][col].state = .visited
+                path.append(currentIndex)
+            }
+            
+            // Add all adjacent
+            // elements to heap
+            for i in 0..<4 {
+                let adjx = row + dRow[i]
+                let adjy = col + dCol[i]
+                
+                if isValid(node: (adjx, adjy)) {
+//                    graph[adjx][adjy].fullDistance = graph[adjx][adjy].heuristicDistance + graph[adjx][adjy].manhattanDistance
+                    heap.enqueue(graph[adjx][adjy])
+                }
+                
+                if (adjx, adjy) == target {
+                    return path
+                }
+            }
+        }
         
         return path
     }
@@ -83,15 +135,37 @@ class AstarSearch {
         
         path = aStarSearch(from: start, to: target, in: graph.nodes)
         printHdistancesMatrix()
+        printMdistancesMatrix()
+        printFdistancesMatrix()
         
         return path
     }
     
     func printHdistancesMatrix() {
-        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Heuristic!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         for nodesRow in graph.nodes {
             for node in nodesRow {
                 print("\(node.heuristicDistance) ", separator: "", terminator: "")
+            }
+            print("")
+        }
+    }
+    
+    func printMdistancesMatrix() {
+        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Manhattan!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        for nodesRow in graph.nodes {
+            for node in nodesRow {
+                print("\(node.manhattanDistance) ", separator: "", terminator: "")
+            }
+            print("")
+        }
+    }
+    
+    func printFdistancesMatrix() {
+        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        for nodesRow in graph.nodes {
+            for node in nodesRow {
+                print("\(node.fullDistance) ", separator: "", terminator: "")
             }
             print("")
         }
