@@ -35,9 +35,6 @@ class Graph {
                 node.fullDistance = Int.max
             }
         }
-//        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-//        printGraph()
-//        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     }
     
     func generate() {
@@ -45,9 +42,11 @@ class Graph {
         
         startIndex = (Int.random(in: 0..<size), Int.random(in: 0..<size))
         targetIndex = (Int.random(in: 0..<size), Int.random(in: 0..<size))
+        
         guard var startIndex, let targetIndex else {
             return
         }
+        
         while startIndex == targetIndex {
             startIndex = (Int.random(in: 0..<size), Int.random(in: 0..<size))
         }
