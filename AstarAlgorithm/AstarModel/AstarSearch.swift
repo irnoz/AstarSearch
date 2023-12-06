@@ -46,7 +46,7 @@ class AstarSearch {
     }
     
     private func calculateManhattanDistance(from target: (Int, Int), to current: (Int, Int)) -> Int {
-        return (abs(target.0 - current.0) + abs(target.1 - current.1)) * 10
+        return (abs(target.0 - current.0) + abs(target.1 - current.1))
     }
     
     private func setManhattanDistance(from start: (Int, Int), in graph: [[Node]]) {

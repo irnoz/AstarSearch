@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     var algorithmPicker: UIPickerView!
     var nodeButtons = [[NodeButton]]()
     var selectedIndexes: [IndexPath] = [IndexPath(row: 0, section: 0)]
-    var graph = Graph(withSize: 10)
+    var graph = Graph(withSize: 10) // 25
     var counter = 1.0
     lazy var dfs = DFSSearch(graph: graph)
     lazy var bfs = BFSSearch(graph: graph)
