@@ -186,15 +186,6 @@ class ViewController: UIViewController {
 //        configureButtonState(node: sender)
 //    }
     
-    private func getIndex(title: String) -> (Int, Int)? {
-        guard let i = title.first?.wholeNumberValue,
-              let j = title.last?.wholeNumberValue
-        else {
-            return nil
-        }
-        return (i, j)
-    }
-    
     func nukeAllAnimations() {
         for buttonsRow in nodeButtons {
             for button in buttonsRow {
