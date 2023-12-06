@@ -45,9 +45,11 @@ class Graph {
         
         startIndex = (Int.random(in: 0..<size), Int.random(in: 0..<size))
         targetIndex = (Int.random(in: 0..<size), Int.random(in: 0..<size))
-        
-        guard let startIndex, let targetIndex else {
+        guard var startIndex, let targetIndex else {
             return
+        }
+        while startIndex == targetIndex {
+            startIndex = (Int.random(in: 0..<size), Int.random(in: 0..<size))
         }
         
         nodes[startIndex.0][startIndex.1].state = .start
