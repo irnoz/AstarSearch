@@ -63,7 +63,6 @@ class Graph {
                 }
             }
         }
-//        printGraph()
     }
     
     func clearPath() {
@@ -72,7 +71,6 @@ class Graph {
                 if node.state == .path || node.state == .visited {
                     node.state = .defaultState
                 }
-                
             }
         }
     }
