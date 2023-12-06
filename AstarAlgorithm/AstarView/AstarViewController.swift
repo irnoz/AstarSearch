@@ -202,6 +202,18 @@ class ViewController: UIViewController {
                 self.nodeButtons[i][j].backgroundColor = .orange
             }
         }
+//        setColorFromHeuristics()
+    }
+    
+    func setColorFromHeuristics() {
+        for i in 0..<graph.size {
+            for j in 0..<graph.size {
+                if (i, j) != graph.startIndex! && (i, j) != graph.targetIndex! {
+                    nodeButtons[i][j].backgroundColor = .blue
+                    nodeButtons[i][j].layer.opacity = 1.0 / Float(graph.nodes[i][j].fullDistance) * 6
+                }
+            }
+        }
     }
     
     func updateGraphView() {

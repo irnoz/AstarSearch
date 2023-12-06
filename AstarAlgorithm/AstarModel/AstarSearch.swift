@@ -87,6 +87,11 @@ class AstarSearch {
         graph[start.0][start.1].fullDistance = graph[start.0][start.1].heuristicDistance
         
         while !heap.isEmpty {
+            
+            for element in heap.elements {
+                print(element.fullDistance, terminator: " ")
+            }
+            print(heap.peek()?.fullDistance)
             guard let current = heap.dequeue() else {
                 return path
             }
@@ -112,7 +117,7 @@ class AstarSearch {
                 let adjy = col + dCol[i]
                 
                 if isValid(node: (adjx, adjy)) {
-//                    graph[adjx][adjy].fullDistance = graph[adjx][adjy].heuristicDistance + graph[adjx][adjy].manhattanDistance
+                    //                    graph[adjx][adjy].fullDistance = graph[adjx][adjy].heuristicDistance + graph[adjx][adjy].manhattanDistance
                     heap.enqueue(graph[adjx][adjy])
                 }
                 
@@ -162,7 +167,7 @@ class AstarSearch {
     }
     
     func printFdistancesMatrix() {
-        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!Full!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         for nodesRow in graph.nodes {
             for node in nodesRow {
                 print("\(node.fullDistance) ", separator: "", terminator: "")
@@ -176,7 +181,7 @@ struct Heap<Element> {
     var elements: [Element]
     let priorityFunction: (Element, Element) -> Bool
     
-    init(elements: [Element], priorityFunction: @escaping (Element, Element) -> Bool) {
+    init(elements: [Element] = [], priorityFunction: @escaping (Element, Element) -> Bool) {
         self.elements = elements
         self.priorityFunction = priorityFunction
         
@@ -221,7 +226,7 @@ struct Heap<Element> {
         return priorityFunction(elements[firstIndex], elements[secondIndex])
     }
     
-    func hightestPriorityIndex(of parentIndex: Int, and childIndex: Int) -> Int {
+    func highestPriorityIndex(of parentIndex: Int, and childIndex: Int) -> Int {
         guard childIndex < count && isHigherPriority(at: childIndex, than: parentIndex) else {
             return parentIndex
         }
@@ -229,9 +234,9 @@ struct Heap<Element> {
         return childIndex
     }
     
-    func hightestPriorityIndex(for parent: Int) -> Int {
-        return hightestPriorityIndex(
-            of: hightestPriorityIndex(
+    func highestPriorityIndex(for parent: Int) -> Int {
+        return highestPriorityIndex(
+            of: highestPriorityIndex(
                 of: parent,
                 and: leftChildIndex(of: parent)),
             and: rightChildIndex(of: parent))
@@ -271,13 +276,12 @@ struct Heap<Element> {
     }
     
     mutating func siftDown(elementAtIndex index: Int) {
-        let childIndex = hightestPriorityIndex(for: index)
-        
+        let childIndex = highestPriorityIndex(for: index)
         if index == childIndex {
             return
         }
         
         swapElement(at: index, with: childIndex)
-        siftDown(elementAtIndex: index)
+        siftDown(elementAtIndex: childIndex)
     }
 }
