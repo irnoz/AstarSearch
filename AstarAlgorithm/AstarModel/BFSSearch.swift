@@ -22,12 +22,12 @@ class BFSSearch {
         let row = current.0
         let col = current.1
         
-        // Make sure cell is in bounds
+        // Make sure node is in bounds
         if row < 0 || col < 0 || row >= graph.size || col >= graph.size {
             return false
         }
         
-        // Make sure cell is not yet viesited
+        // Make sure node is not yet viesited
         if graph.nodes[row][col].state == .visited || graph.nodes[row][col].state == .blocked {
             return false
         }
@@ -53,7 +53,7 @@ class BFSSearch {
             }
             
             // Check if the current
-            // popped cell is valid
+            // popped node is valid
             if !isValid(node: current) {
                 continue
             }
@@ -62,15 +62,11 @@ class BFSSearch {
             let col = current.1
             
             // Mark the current
-            // cell as visited
+            // node as visited
             if (current != target && current != start) {
                 graph[row][col].state = .visited
                 path.append(current)
             }
-            
-            // Print the element at
-            // the current top cell
-//            print("\(row), \(col): \(graph[row][col].state) ", terminator: "")
             
             // Add all adjacent
             // elements to queue

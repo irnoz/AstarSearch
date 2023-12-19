@@ -14,13 +14,29 @@ class ViewController: UIViewController {
     var algorithmPicker: UIPickerView!
     var nodeButtons = [[NodeButton]]()
     var selectedIndexes: [IndexPath] = [IndexPath(row: 0, section: 0)]
-    var graph = Graph(withSize: 10) // 25
     var counter = 1.0
+
     lazy var dfs = DFSSearch(graph: graph)
     lazy var bfs = BFSSearch(graph: graph)
     lazy var aStar = AstarSearch(graph: graph)
-    
+
     var algorithms = ["Astar", "DFS", "BFS"]
+
+    var graph = {
+        let device = UIDevice.current.userInterfaceIdiom
+        let size: Int
+        switch device {
+        case .phone:
+            size = 10
+        case .pad:
+            size = 25
+        case .tv:
+            size = 100
+        default:
+            size = 10
+        }
+        return Graph(withSize: size)
+    }() // Graph(withSize: 10) // 25
     
     // MARK: Life Cycle
     override func viewDidLoad() {
@@ -231,6 +247,7 @@ class ViewController: UIViewController {
     }
 }
 
+// MARK: - Picker Extension
 extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1

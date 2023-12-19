@@ -37,7 +37,7 @@ class AstarSearch {
         return true
     }
     
-    // Check if cell is out of bounds
+    // Check if node is out of bounds
     private func isInBounds(row: Int, col: Int) -> Bool {
         if row < 0 || col < 0 || row >= graph.size || col >= graph.size {
             return false
@@ -61,11 +61,15 @@ class AstarSearch {
         }
     }
     
+    private func calculateHeuristicDistance(from target: (Int, Int), to current: (Int, Int)) -> Int {
+        return ((target.0 - current.0) ^^ 2) + ((target.1 - current.1) ^^ 2)
+    }
+    
     private func setHeuristicDistance(from target: (Int, Int), in graph: [[Node]]) {
         let size = graph.count
         for i in 0..<size {
             for j in 0..<size {
-                graph[i][j].heuristicDistance = calculateManhattanDistance(from: target, to: (i, j))
+                graph[i][j].heuristicDistance = calculateHeuristicDistance(from: target, to: (i, j))
             }
         }
     }
@@ -82,16 +86,16 @@ class AstarSearch {
         setHeuristicDistance(from: target, in: graph)
         setManhattanDistance(from: start, in: graph)
         
-        // Set real distance to start
+        // Set full distance to start
         graph[start.0][start.1].manhattanDistance = 0
         graph[start.0][start.1].fullDistance = graph[start.0][start.1].heuristicDistance
         
         while !heap.isEmpty {
             
-            for element in heap.elements {
-                print(element.fullDistance, terminator: " ")
-            }
-            print(heap.peek()?.fullDistance)
+//            for element in heap.elements {
+//                print(element.fullDistance, terminator: " ")
+//            }
+//            print(heap.peek()?.fullDistance)
             guard let current = heap.dequeue() else {
                 return path
             }
@@ -117,7 +121,7 @@ class AstarSearch {
                 let adjy = col + dCol[i]
                 
                 if isValid(node: (adjx, adjy)) {
-                    //                    graph[adjx][adjy].fullDistance = graph[adjx][adjy].heuristicDistance + graph[adjx][adjy].manhattanDistance
+//                    graph[adjx][adjy].fullDistance = graph[adjx][adjy].heuristicDistance + graph[adjx][adjy].manhattanDistance
                     heap.enqueue(graph[adjx][adjy])
                 }
                 
@@ -135,13 +139,14 @@ class AstarSearch {
         guard let start = graph.startIndex,
               let target = graph.targetIndex
         else {
+            print("target or start is not set")
             return path
         }
         
         path = aStarSearch(from: start, to: target, in: graph.nodes)
-        printHdistancesMatrix()
-        printMdistancesMatrix()
-        printFdistancesMatrix()
+//        printHdistancesMatrix()
+//        printMdistancesMatrix()
+//        printFdistancesMatrix()
         
         return path
     }
@@ -285,3 +290,11 @@ struct Heap<Element> {
         siftDown(elementAtIndex: childIndex)
     }
 }
+
+
+precedencegroup PowerPrecedence { higherThan: MultiplicationPrecedence }
+infix operator ^^ : PowerPrecedence
+func ^^ (radix: Int, power: Int) -> Int {
+    return Int(pow(Double(radix), Double(power)))
+}
+

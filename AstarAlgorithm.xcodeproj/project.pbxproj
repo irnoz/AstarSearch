@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A85D5B2D2B31CCFD00E01E93 /* ReworkedAstarSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85D5B2C2B31CCFD00E01E93 /* ReworkedAstarSearch.swift */; };
 		CE26951A2B148BF700C9032D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2695192B148BF700C9032D /* AppDelegate.swift */; };
 		CE26951E2B148BF700C9032D /* AstarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE26951D2B148BF700C9032D /* AstarViewController.swift */; };
 		CE2695232B148BF800C9032D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE2695222B148BF800C9032D /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A85D5B2C2B31CCFD00E01E93 /* ReworkedAstarSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReworkedAstarSearch.swift; sourceTree = "<group>"; };
 		CE2695162B148BF700C9032D /* AstarAlgorithm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AstarAlgorithm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE2695192B148BF700C9032D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE26951D2B148BF700C9032D /* AstarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstarViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			children = (
 				CE2695352B15CECD00C9032D /* AstarModel.swift */,
 				CE2695372B15F06F00C9032D /* AstarSearch.swift */,
+				A85D5B2C2B31CCFD00E01E93 /* ReworkedAstarSearch.swift */,
 				CE2695392B17376600C9032D /* DFSSearch.swift */,
 				CE7725DA2B19BA92003FCEDD /* BFSSearch.swift */,
 			);
@@ -189,6 +192,7 @@
 				CE2695342B15CEBB00C9032D /* AstarViewModel.swift in Sources */,
 				CE26953A2B17376600C9032D /* DFSSearch.swift in Sources */,
 				CE26951A2B148BF700C9032D /* AppDelegate.swift in Sources */,
+				A85D5B2D2B31CCFD00E01E93 /* ReworkedAstarSearch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

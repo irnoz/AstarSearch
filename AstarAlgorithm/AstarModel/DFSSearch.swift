@@ -25,12 +25,12 @@ class DFSSearch {
         let row = current.0
         let col = current.1
         
-        // If cell is out of bounds
+        // If node is out of bounds
         if row < 0 || col < 0 || row >= graph.size || col >= graph.size {
             return false
         }
 
-        // If the cell is already visited
+        // If the node is already visited
         if graph.nodes[row][col].state == .visited || graph.nodes[row][col].state == .blocked {
             return false
         }
@@ -53,23 +53,20 @@ class DFSSearch {
             let col = current.1
 
             // Check if the current popped
-            // cell is a valid cell or not
+            // node is a valid cell or not
             if !isValid(node: current) {
                 continue
             }
 
             // Mark the current
-            // cell as visited
+            // node as visited
             if (current != target && current != start) {
                 graph[row][col].state = .visited
                 path.append(current)
             }
-            // Print the element at
-            // the current top cell
-//            print("\(row), \(col): \(graph[row][col].state) ", terminator: "")
 
             // Push all the adjacent 
-            // cells in stack
+            // nodes in stack
             for i in 0..<4 {
                 let adjx = row + dRow[i]
                 let adjy = col + dCol[i]
@@ -83,7 +80,6 @@ class DFSSearch {
         return path
     }
 
-    // Function call
     func search() -> [(Int, Int)] {
         var path = [(Int, Int)]()
         guard let start = graph.startIndex,
